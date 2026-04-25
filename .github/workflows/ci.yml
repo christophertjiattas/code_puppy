@@ -80,14 +80,14 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Install dev dependencies (ruff)
-        run: pip install ruff
+      - name: Install uv
+        run: pip install uv
 
-      - name: Install code_puppy
-        run: pip install .
+      - name: Sync project and dev dependencies from lockfile
+        run: uv sync --frozen --group dev
 
       - name: Lint with ruff
-        run: ruff check .
+        run: uv run ruff check .
 
       - name: Check formatting with ruff
-        run: ruff format --check .
+        run: uv run ruff format --check .
